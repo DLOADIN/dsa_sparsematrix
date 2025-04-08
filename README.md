@@ -1,77 +1,111 @@
-# BX Operator - Advanced Matrix Operations Suite
+# BX Operator
+
+A high-performance library for advanced sparse matrix operations.
 
 ## Overview
 
-BX Operator is a command-line interface (CLI) tool designed for performing advanced operations on sparse matrices. It supports loading matrices from files, performing various matrix operations, and displaying results in a user-friendly format.
-
+BX Operator provides a powerful command-line interface for working with sparse matrices. It efficiently handles large matrix operations through optimized algorithms and memory management techniques.
 
 ## Features
 
-- **Loading and Displaying Matrices**
-  - Load matrices from files
-  - Display matrices in a readable format
+- **Matrix Management**
+  - Import matrices from standard file formats
+  - Export results to various formats
+  - Memory-efficient sparse representation
 
-- **Matrix Operations**
-  - Addition, Subtraction, Multiplication
-  - Transposition
-  - Conversion to Compressed Sparse Row (CSR) format
+- **Core Operations**
+  - Matrix addition and subtraction
+  - Matrix multiplication with optimized algorithms
+  - Transpose operation
+  - Conversion to/from Compressed Sparse Row (CSR) format
 
-- **Error Handling**
-  - Detailed error messages for file format issues and dimension mismatches
+- **Interactive CLI**
+  - User-friendly command interface
+  - Progress indicators for long-running operations
+  - Comprehensive error reporting
 
 ## Installation
 
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/DLOADIN/dsa_sparsematrix.git
-    ```
-2. Navigate to the project directory:
-    ```sh
-    cd BXOperator
-    ```
-3. Install the required dependencies:
-    ```sh
-    pip install -r requirements.txt
-    ```
+```bash
+# Clone the repository
+git clone https://github.com/DLOADIN/dsa_sparsematrix.git
 
-!Installation
+# Navigate to project directory
+cd dsa_sparsematrix
+
+# Install dependencies
+pip install -r requirements.txt
+```
 
 ## Usage
 
-1. Start the CLI:
-    ```sh
-    python drain.py
-    ```
-2. Use the following commands to interact with the tool:
-    - `load <file_path1> <file_path2>`: Load two matrices from specified files
-    - `opp + <file_output.txt>`: Perform matrix addition
-    - `opp - <file_output.txt>`: Perform matrix subtraction
-    - `opp * <file_output.txt>`: Perform matrix multiplication
-    - `help`: Display the help menu
-    - `exit`: Exit the application
+### Starting the Application
 
+```bash
+python drain.py
+```
 
-## File Format Requirements
+### Basic Commands
 
-- Input files should contain space-separated numbers
-- Each line represents a row in the matrix
-- All rows must have the same number of columns
-- Example format:
-    ```
-    rows=10
-    cols=10
-    (1 0 0)
-    (0 1 0)
-    (0 0 1)
-    ```
+| Command | Description |
+|---------|-------------|
+| `load <file1> <file2>` | Load two matrices from specified files |
+| `opp + <output_file>` | Add matrices and save to output file |
+| `opp - <output_file>` | Subtract matrices and save to output file |
+| `opp * <output_file>` | Multiply matrices and save to output file |
+| `help` | Display available commands |
+| `exit` | Exit the application |
+
+### Example Session
+
+```
+$ python drain.py
+BX Operator v1.0.0
+> load matrix1.txt matrix2.txt
+Matrices loaded successfully.
+> opp * result.txt
+Operation completed successfully.
+> exit
+```
+
+## Input File Format
+
+BX Operator accepts matrices in the following format:
+
+```
+rows=3
+cols=3
+(1 0 0)
+(0 1 0)
+(0 0 1)
+```
+
+- The first line specifies the number of rows
+- The second line specifies the number of columns
+- Subsequent lines contain the matrix values in parentheses
+- Values must be space-separated
 
 ## Error Handling
 
-- Success indicators show when operations complete
-- Error messages explain why operations fail
-- Loading errors indicate file format issues
-- Dimension mismatch errors show specific requirements
+The application provides detailed error messages for common issues:
+- File not found or permission errors
+- Matrix dimension mismatches
+- Invalid file formats
+- Memory limitations
+
+## Performance Considerations
+
+- Optimized for sparse matrices with many zero elements
+- Memory usage scales with the number of non-zero elements rather than matrix dimensions
+- Large matrices may require significant processing time for multiplication operations
 
 ## Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request.
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b new-feature`
+3. Commit your changes: `git commit -am 'Add new feature'`
+4. Push to the branch: `git push origin new-feature`
+5. Submit a pull request
+
