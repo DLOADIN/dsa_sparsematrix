@@ -1,0 +1,8 @@
+new_spare
+*.txt
+/drain.py
+/File_parser.py
+/mainclasses.py
+/__pycache
+/output.txtx
+/__pycache__/
