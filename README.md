@@ -1,111 +1,116 @@
-# BX Operator
-
-A high-performance library for advanced sparse matrix operations.
+# Sparse Matrix Implementation
 
 ## Overview
+This repository contains an implementation of a sparse matrix data structure in JavaScript. The implementation is designed to efficiently handle matrices where most elements are zero by only storing non-zero elements in memory. This approach optimizes both memory usage and computational efficiency for operations like addition, subtraction, and matrix multiplication.
 
-BX Operator provides a powerful command-line interface for working with sparse matrices. It efficiently handles large matrix operations through optimized algorithms and memory management techniques.
+## File Structure
+- `./dsa/sparse_matrix/code/src/main.js` - Main program/file implementing the SparseMatrix class and operations.
+- `./dsa/sparse_matrix/sample_inputs/` - Directory containing example matrix files.
+- `./dsa/sparse_matrix/sample_inputs/outputs.txt` - Output file where results are stored & modified overtime.
 
 ## Features
+- Efficient sparse matrix representation using a Map data structure
+- Matrix operations: addition, subtraction, and multiplication
+- File I/O for loading matrix data and saving results
+- Comprehensive error handling
 
-- **Matrix Management**
-  - Import matrices from standard file formats
-  - Export results to various formats
-  - Memory-efficient sparse representation
+## The SparseMatrix Class
+The core of the implementation is the `SparseMatrix` class which includes:
 
-- **Core Operations**
-  - Matrix addition and subtraction
-  - Matrix multiplication with optimized algorithms
-  - Transpose operation
-  - Conversion to/from Compressed Sparse Row (CSR) format
+### Data Structure
+The sparse matrix uses a JavaScript Map where:
+- Keys are strings in the format `"row,col"` representing element coordinates
+- Values are the non-zero numerical values at those coordinates
 
-- **Interactive CLI**
-  - User-friendly command interface
-  - Progress indicators for long-running operations
-  - Comprehensive error reporting
 
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/DLOADIN/dsa_sparsematrix.git
-
-# Navigate to project directory
-cd dsa_sparsematrix
-
-# Install dependencies
-pip install -r requirements.txt
+## Matrix Format
+Input and output matrices follow this format:
+```
+rows=<number_of_rows>
+cols=<number_of_columns>
+(<row_index>, <column_index>, <value>)
+(<row_index>, <column_index>, <value>)
+...
 ```
 
-## Usage
+Where:
+- First line specifies the number of rows
+- Second line specifies the number of columns
+- Subsequent lines list non-zero elements as `(row, column, value)` triplets
 
-### Starting the Application
+## These are the main Matrix Operations
 
-```bash
-python drain.py
+### Addition
+- Requires matrices of the same dimensions
+- Adds corresponding elements
+- Time complexity: O(n+m) where n and m are the number of non-zero elements
+
+### Subtraction
+- Requires matrices of the same dimensions
+- Subtracts corresponding elements
+- Time complexity: O(n+m) where n and m are the number of non-zero elements
+
+### Multiplication
+- Requires the number of columns in the first matrix to equal the number of rows in the second
+- Follows standard matrix multiplication algorithm
+- Optimized to only consider non-zero elements
+- Time complexity: O(n*p*q) where:
+  - n = non-zero elements in first matrix
+  - p = average non-zero elements per row in first matrix
+  - q = average non-zero elements per column in second matrix
+
+## How to Run
+
+1. Navigate to the directory containing by writting `cd /dsa/sparse_matrix/code/src/main.js`; This is where my main code is placed 
+
+2. Run the program using Node.js:
+   ```
+   node main.js
+   ```
+3. Follow the interactive prompts:
+   - Select first matrix from the list (1)
+   - Select second matrix from the list (2)
+   - Choose an operation (addition, subtraction, or multiplication)
+4. The result will be displayed and automatically saved to `/dsa/sparse_matrix/sample_inputs/` as `outputs.txt`
+
+## Examples
+
+### Sample Input Files
+
+Example of my `matrix1.txt`:
+```
+rows=5
+cols=5
+(0, 0, 5)
+(1, 1, 8)
+(2, 2, 3)
+(3, 1, 6)
+(4, 4, 9)
 ```
 
-### Basic Commands
-
-| Command | Description |
-|---------|-------------|
-| `load <file1> <file2>` | Load two matrices from specified files |
-| `opp + <output_file>` | Add matrices and save to output file |
-| `opp - <output_file>` | Subtract matrices and save to output file |
-| `opp * <output_file>` | Multiply matrices and save to output file |
-| `help` | Display available commands |
-| `exit` | Exit the application |
-
-### Example Session
-
+Example of my `matrix2.txt`:
 ```
-$ python drain.py
-BX Operator v1.0.0
-> load matrix1.txt matrix2.txt
-Matrices loaded successfully.
-> opp * result.txt
-Operation completed successfully.
-> exit
+rows=5
+cols=5
+(0, 4, 7)
+(1, 3, 2)
+(4, 0, 1)
 ```
 
-## Input File Format
-
-BX Operator accepts matrices in the following format:
-
+### Take a look of My Subtraction
 ```
-rows=3
-cols=3
-(1 0 0)
-(0 1 0)
-(0 0 1)
+SparseMatrix(5x5):
+5 0 0 0 -7
+0 8 0 -2 0
+0 0 3 0 0
+0 6 0 0 0
+-1 0 0 0 9
 ```
 
-- The first line specifies the number of rows
-- The second line specifies the number of columns
-- Subsequent lines contain the matrix values in parentheses
-- Values must be space-separated
-
-## Error Handling
-
-The application provides detailed error messages for common issues:
-- File not found or permission errors
-- Matrix dimension mismatches
+### Error Handling
+The implementation includes robust error handling for:
 - Invalid file formats
-- Memory limitations
-
-## Performance Considerations
-
-- Optimized for sparse matrices with many zero elements
-- Memory usage scales with the number of non-zero elements rather than matrix dimensions
-- Large matrices may require significant processing time for multiplication operations
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b new-feature`
-3. Commit your changes: `git commit -am 'Add new feature'`
-4. Push to the branch: `git push origin new-feature`
-5. Submit a pull request
+- File not found errors
+- Matrix dimension mismatches for operations
+- Out-of-bounds indices
 
