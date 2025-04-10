@@ -54,12 +54,10 @@ class SparseMatrix {
                         throw new Error("Input file has wrong format");
                     }
                     
-                    // Check if indices are within bounds
                     if (row < 0 || row >= this.numRows || col < 0 || col >= this.numCols) {
                         throw new Error(`Matrix indices out of bounds: (${row}, ${col})`);
                     }
                     
-                    // Store the non-zero value
                     if (value !== 0) {
                         this.data.set(`${row},${col}`, value);
                     }
@@ -101,14 +99,11 @@ class SparseMatrix {
         }
         
         const result = new SparseMatrix(null, this.numRows, this.numCols);
-        
-        // Add all elements from the first matrix
         for (const [key, value] of this.data.entries()) {
             const [row, col] = key.split(',').map(Number);
             result.setElement(row, col, value);
         }
         
-        // Add all elements from the second matrix
         for (const [key, value] of other.data.entries()) {
             const [row, col] = key.split(',').map(Number);
             const current = result.getElement(row, col);
@@ -190,7 +185,6 @@ class SparseMatrix {
         let content = `rows=${this.numRows}\n`;
         content += `cols=${this.numCols}\n`;
         
-        // Sort entries for consistent output
         const entries = Array.from(this.data.entries())
             .map(([key, value]) => {
                 const [row, col] = key.split(',').map(Number);
@@ -219,11 +213,9 @@ function main() {
     console.log("Sparse Matrix Operations");
     console.log("=======================");
     
-    // Define the input and output paths
     const sampleInputsDir = path.resolve(__dirname, "../../sample_inputs");
     const outputFile = path.resolve(__dirname, "../../sample_inputs/outputs.txt");
     
-    // Get a list of matrix files in the sample_inputs directory
     let matrixFiles;
     try {
         matrixFiles = fs.readdirSync(sampleInputsDir)
@@ -242,13 +234,12 @@ function main() {
         return;
     }
     
-    // Display available matrix files
+    
     console.log("\nAvailable matrix files:");
     matrixFiles.forEach((file, index) => {
         console.log(`${index + 1}. ${path.basename(file)}`);
     });
     
-    // Ask user to select first matrix
     rl.question("\nSelect first matrix (enter number): ", (choice1) => {
         const matrix1Index = parseInt(choice1) - 1;
         
@@ -258,7 +249,7 @@ function main() {
             return;
         }
         
-        // Ask user to select second matrix
+        
         rl.question("Select second matrix (enter number): ", (choice2) => {
             const matrix2Index = parseInt(choice2) - 1;
             
@@ -272,7 +263,6 @@ function main() {
             const matrix2Path = matrixFiles[matrix2Index];
             
             try {
-                // Load matrices from files
                 const matrix1 = new SparseMatrix(matrix1Path);
                 const matrix2 = new SparseMatrix(matrix2Path);
                 
@@ -310,7 +300,7 @@ function main() {
                         console.log(`\nResult of ${operationName}:`);
                         console.log(result.toString());
                         
-                        // Save to outputs.txt
+                        // ALL the data is stored in memory in the outputs.txt
                         result.toFile(outputFile);
                         console.log(`\nResult saved to ${outputFile}`);
                         rl.close();
