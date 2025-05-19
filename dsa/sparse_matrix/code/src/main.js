@@ -4,6 +4,8 @@
             this.numRows = numRows;
             this.numCols = numCols;
             
+            
+            //Checks if the source text are characters & strings
             if (typeof source === 'string') {
                 this._loadFromFile(source);
             } else {
@@ -27,10 +29,10 @@
                     this.numCols = parseInt(lines[1].split('=')[1]);
                     
                     if (isNaN(this.numRows) || isNaN(this.numCols)) {
-                        throw new Error("Input file has wrong format");
+                        throw new Error("Input file has a wrong format");
                     }
                 } catch (e) {
-                    throw new Error("Input file has wrong format");
+                    throw new Error("Input file has a wrong format");
                 }
                 
                 for (let i = 2; i < lines.length; i++) {
