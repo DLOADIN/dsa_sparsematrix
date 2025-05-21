@@ -4,9 +4,8 @@
 This repository contains an implementation of a sparse matrix data structure in JavaScript. The implementation is designed to efficiently handle matrices where most elements are zero by only storing non-zero elements in memory. This approach optimizes both memory usage and computational efficiency for operations like addition, subtraction, and matrix multiplication.
 
 ## File Structure
--`./dsa/sparse_matrix/code/src/main.js` - Main program/file implementing the SparseMatrix class and operations.
+-`./dsa/sparse_matrix/code/src/main.py` - Main program/file implementing the SparseMatrix class and operations.
 -`./dsa/sparse_matrix/sample_inputs/` - Directory containing example matrix files.
--`./dsa/sparse_matrix/sample_inputs/outputs.txt` - Output file where results are stored & modified overtime.
 
 ## Features
 - Efficient sparse matrix representation using a Map data structure
@@ -61,17 +60,16 @@ Where:
 
 ## How to Run
 
-1. Navigate to the directory containing by writting `cd /dsa/sparse_matrix/code/src/main.js`; This is where my main code is placed 
+1. Navigate to the directory containing by writting `cd /dsa/sparse_matrix/code/src/main.py`; This is where my main code is placed 
 
-2. Run the program using Node.js:
+2. Run the program using python:
    ```
-   node main.js
+   python main.py
    ```
 3. Follow the interactive prompts:
    - Select first matrix from the list (1)
    - Select second matrix from the list (2)
    - Choose an operation (addition, subtraction, or multiplication)
-4. The result will be displayed and automatically saved to `/dsa/sparse_matrix/sample_inputs/` as `outputs.txt`
 
 ## Examples
 
